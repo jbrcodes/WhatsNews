@@ -1,9 +1,10 @@
 # /jbrbabel/app.py
 
-import logging
-import re
+# import logging
+# import re
 
 from flask import Flask
+from .models import db_init_app
 
 
 def create_app():
@@ -20,8 +21,7 @@ def create_app():
     # Database
     #
 
-    # from fcc.models import db
-    # db.init_app(app)
+    db_init_app(app)
 
     #
     # Blueprints

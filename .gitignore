@@ -1,4 +1,4 @@
-.DS_Store
+
 __pycache__/
 venv/
 
@@ -9,5 +9,5 @@ instance/
 jbr/
 logs/
 
-.flaskenv
+.DS_Store
 NOTES.md
