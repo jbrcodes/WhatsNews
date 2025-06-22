@@ -1,0 +1,26 @@
+{# /jbrbabel/templates/home.html #}
+
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% for feed in feeds %}
+    <h2>{{ feed.title }}</h2>
+    <div class="feed-grid">
+
+        {% for item in feed.feed_items %}
+            <div><b>{{ item.title_en }}</b></div>
+            <div dir="auto"><b>{{ item.title }}</b></div>
+
+            <div>{{ item.description_en }}</div>
+            <div dir="auto">{{ item.description }}</div>
+        {% endfor %}
+
+    </div>
+
+
+{% endfor %}
+
+{% endblock %}

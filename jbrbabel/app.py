@@ -3,7 +3,7 @@
 # import logging
 # import re
 
-from flask import Flask
+from flask import Flask, render_template
 from .models import db_init_app
 
 
@@ -29,16 +29,28 @@ def create_app():
 
     from .blues.cli import bp as cli_bp
     app.register_blueprint(cli_bp)
-    from .blues.public import bp as public_bp
-    app.register_blueprint(public_bp)
+    # from .blues.public import bp as public_bp
+    # app.register_blueprint(public_bp)
 
     #
-    # Template Filters
+    # Routes (MOVE ME)
     #
 
-    # @app.template_filter('strip_http')
-    # def strip_http(url):
-    #     return re.sub(r'^https?://', '', url)
+    @app.route('/')
+    def home():
+        from .models.Feed import Feed
+        # from .models.FeedItem import FeedItem
+
+        # feeds = (Feed
+        #          .select()
+        #          .join(FeedItem)
+        #          .order_by(Feed.title, -FeedItem.pub_date)
+        # )
+
+        # Warning! This does N+1 queries!!
+        feeds = Feed.select().order_by(Feed.title)
+
+        return render_template('home.html', feeds=feeds)
 
     return app
 

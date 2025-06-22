@@ -1,11 +1,12 @@
 # /jbrbabel/models/Feed.py
 
+import re
 import feedparser
 import peewee as pw
 from . import BaseModel
 
 
-MAX_DESC_WORDS = 10
+MAX_DESC_WORDS = 30
 
 
 class Feed(BaseModel):
@@ -25,11 +26,13 @@ class Feed(BaseModel):
         items = []
 
         for entry in feed_obj.entries:
-            words = entry.description.split()
+            # Hack: remove possible image tag(s) from description
+            desc = re.sub(r'<img .*?>', '', entry.description)
+
+            # Limit length of description
+            words = desc.split()
             if len(words) > MAX_DESC_WORDS:
                 desc = ' '.join(words[:MAX_DESC_WORDS]) + '...'
-            else:
-                desc = entry.description
 
             foo = {
                 'title': entry.title,
@@ -39,6 +42,7 @@ class Feed(BaseModel):
                 'feed': self
             }
             items.append(foo)
+
         return items
 
 
