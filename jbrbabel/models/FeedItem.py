@@ -2,6 +2,7 @@
 
 import peewee as pw
 from . import BaseModel
+from .Feed import Feed
 from jbrbabel.lib.deepl import translate_strs
 
 
@@ -14,7 +15,7 @@ class FeedItem(BaseModel):
     description_en = pw.CharField()
     pub_date = pw.DateTimeField()
     url = pw.CharField()
-    feed_id = pw.IntegerField()
+    feed = pw.ForeignKeyField(Feed, backref='feed_items')
 
     class Meta:
         table_name = 'feed_items'

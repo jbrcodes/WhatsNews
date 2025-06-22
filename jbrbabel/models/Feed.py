@@ -36,7 +36,7 @@ class Feed(BaseModel):
                 'description': desc,
                 'url': entry.link,
                 'pub_date': entry.published,
-                'feed_id': self.id
+                'feed': self
             }
             items.append(foo)
         return items
