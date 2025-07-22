@@ -2,7 +2,7 @@
 
 import peewee as pw
 from . import BaseModel
-from .Feed import Feed
+from .Site import Site
 from jbrbabel.lib.deepl import translate_strs
 
 
@@ -11,11 +11,11 @@ class FeedItem(BaseModel):
     id = pw.AutoField()
     title = pw.CharField()
     title_en = pw.CharField()
-    description = pw.CharField()
-    description_en = pw.CharField()
+    summary = pw.CharField()
+    summary_en = pw.CharField()
     pub_date = pw.DateTimeField()
     url = pw.CharField()
-    feed = pw.ForeignKeyField(Feed, backref='feed_items')
+    feed = pw.ForeignKeyField(Site, backref='feed_items')
 
     class Meta:
         table_name = 'feed_items'
@@ -26,14 +26,14 @@ class FeedItem(BaseModel):
         strs = []
         for dict in dicts:
             strs.append(dict['title'])
-            strs.append(dict['description'])
+            strs.append(dict['summary'])
         
         strs_en = translate_strs(strs)
 
         i = 0
         for dict in dicts:
             dict['title_en'] = strs_en[i]
-            dict['description_en'] = strs_en[i+1]
+            dict['summary_en'] = strs_en[i+1]
             i += 2
         
         return dicts

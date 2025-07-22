@@ -1,22 +1,44 @@
 # /jbrbabel/models/seed.py
 
 from . import db
-from .Feed import Feed
+from .Site import Site
 from .FeedItem import FeedItem
 
 
 def redo_tables():
-    classes = [Feed, FeedItem]
+    classes = [Site, FeedItem]
     db.drop_tables(classes)
     db.create_tables(classes)
 
 
-feed_data = [
-    { 'title': 'Les Amis de Svieta', 'url': 'https://www.svieta.org/de/feed/', 'source_lang': 'DE' },
-    { 'title': 'Al Jazeera', 'url': 'https://www.aljazeera.net/aljazeerarss/', 'source_lang': 'AR' },
-    { 'title': 'News Bulgaria', 'url': 'https://www.novinite.bg/rss', 'source_lang': 'BG' },
-    { 'title': 'Haaretz', 'url': 'https://www.haaretz.co.il/srv/htz---all-articles', 'source_lang': 'HE' }
+site_data = [
+    {
+        'name':     'elDiario.es',
+        'url':      'https://eldiario.es',
+        'feed_url': 'https://www.eldiario.es/rss/',
+        'country':  'Spain'
+    },{
+        'name':     'Korean News',
+        'url':      'https://www.yna.co.kr',
+        'feed_url': 'https://www.yna.co.kr/rss/news.xml',
+        'country':  'Korea'
+    },{
+        'name':     'Al Jazeera',
+        'url':      'https://www.aljazeera.net',
+        'feed_url': 'https://www.aljazeera.net/aljazeerarss/',
+        'country':  'Qatar'
+    },{
+        'name':     'News Bulgaria',
+        'url':      'https://www.novinite.bg',
+        'feed_url': 'https://www.novinite.bg/rss',
+        'country':  'Bulgaria'
+    },{
+        'name':     'Haaretz',
+        'url':      'https://www.haaretz.co.il',
+        'feed_url': 'https://www.haaretz.co.il/srv/htz---all-articles',
+        'country':  'Israel'
+    }
 ]
 
 def do_seed():
-    Feed.insert_many(feed_data).execute()
+    Site.insert_many(site_data).execute()

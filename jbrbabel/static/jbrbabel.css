@@ -1,7 +1,19 @@
+/* /jbrbabel/static/jbrbabel.css */
 
+h2 {
+    margin: 2em 0 0.5em;
+    border-bottom: 2px solid #ccc;
+}
 
-.feed-grid {
+/* .feed-grid {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
+} */
+
+.orig-lang {
+    /* display: none; */
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-left: 20px;
 }

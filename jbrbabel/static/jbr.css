@@ -1,0 +1,116 @@
+:root {
+    --button-text: black;
+    --button-text-hover: black;
+    --button-text-active: white;
+
+    --button-bg: #ccc;
+    --button-bg-hover: #aaa;
+    --button-bg-active: #666;
+
+    font-family: Avenir, Helvetica, sans-serif;
+    font-size: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.jbr-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.jbr-container.jbr-md {
+    max-width: 400px;
+}
+
+
+
+/***
+ * Tables
+ ***/
+
+.jbr-table {
+    border-collapse: collapse;
+    margin: 1em 0;
+    width: 100%;
+}
+
+.jbr-table thead tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.jbr-table th,
+.jbr-table td {
+    padding: 2px;
+}
+
+.jbr-table th {
+    text-align: left;
+}
+
+
+/***
+ * Buttons
+ (borrowed from SK_play1)
+ ***/
+
+.jbr-button {
+    display: inline-block;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1em;
+    padding: 5px 10px;
+    color: var(--button-text);
+    background-color: var(--button-bg);
+    border-radius: 5px;
+    border-width: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.jbr-button:hover {
+    color: var(--button-text-hover);
+    background-color: var(--button-bg-hover);
+}
+
+.jbr-button.jbr-sm {
+    font-size: .75rem;
+    padding: 3px 5px;
+}
+
+
+/***
+ * Forms
+ ***/
+
+.jbr-form {
+    margin: 1em 0;
+}
+
+.jbr-form .jbr-row {
+    margin-bottom: 1em;
+}
+
+.jbr-form label {
+    display: inline-block;
+    width: 100%;
+    font-weight: bold;
+}
+
+.jbr-form input,
+.jbr-form textarea {
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    line-height: 1em;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

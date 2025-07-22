@@ -3,7 +3,7 @@
 from flask import Blueprint, current_app
 from jbrbabel.lib.deepl import deepl_init
 from jbrbabel.models.seed import redo_tables, do_seed
-from jbrbabel.models.Feed import Feed
+from jbrbabel.models.Site import Site
 from jbrbabel.models.FeedItem import FeedItem
 
 
@@ -25,8 +25,8 @@ def db_init():
 def fetch():
     deepl_init( current_app.config['DEEPL_API_KEY'] )
 
-    for feed in Feed.select():  # DEBUG
-        print( f'{feed.title} ({feed.source_lang})' )
-        dicts = feed.fetch_rss()[:3]  # NOT YET SAVED
+    for site in Site.select():  # DEBUG
+        print(site.name + '...')
+        dicts = site.fetch_rss()[:3]  # NOT YET SAVED
         dicts1 = FeedItem.add_translations(dicts)  # DEBUG
         FeedItem.insert_many(dicts1).execute()

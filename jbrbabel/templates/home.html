@@ -6,21 +6,28 @@
 
 {% block content %}
 
-{% for feed in feeds %}
-    <h2>{{ feed.title }}</h2>
-    <div class="feed-grid">
+{% for site in sites %}
+    {% set f_id = loop.index %}
+    <h2>{{ site.name }}</h2>
+    <div class="site-grid">
 
-        {% for item in feed.feed_items %}
-            <div><b>{{ item.title_en }}</b></div>
-            <div dir="auto"><b>{{ item.title }}</b></div>
+        {% for item in site.feed_items %}
+            {% set div_id = 'ol_' ~ f_id ~ '_' ~ loop.index %}
+            <div>
+                <h3>{{ item.title_en }}</h3>
+                DB str: {{ item.pub_date }} | localtime:
+                <script>foo('{{ item.pub_date }}')</script>
+                <div>{{ item.summary_en }}</div>
+                <a href="javascript: showOrigLang('{{ div_id }}')">show</a>
+            </div>
 
-            <div>{{ item.description_en }}</div>
-            <div dir="auto">{{ item.description }}</div>
+            <div id="{{ div_id }}" class="orig-lang" style="display: none">
+                <h3 dir="auto">{{ item.title }}</h3>
+                <div dir="auto">{{ item.summary }}</div>
+            </div>
         {% endfor %}
 
     </div>
-
-
 {% endfor %}
 
 {% endblock %}

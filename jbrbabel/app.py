@@ -38,7 +38,7 @@ def create_app():
 
     @app.route('/')
     def home():
-        from .models.Feed import Feed
+        from .models.Site import Site
         # from .models.FeedItem import FeedItem
 
         # feeds = (Feed
@@ -48,9 +48,9 @@ def create_app():
         # )
 
         # Warning! This does N+1 queries!!
-        feeds = Feed.select().order_by(Feed.title)
+        sites = Site.select().order_by(Site.name)
 
-        return render_template('home.html', feeds=feeds)
+        return render_template('home.html', sites=sites)
 
     return app
 
