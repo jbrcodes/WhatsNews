@@ -5,15 +5,34 @@ h2 {
     border-bottom: 2px solid #ccc;
 }
 
+h3 {
+    margin-top: 1em;
+}
+
+body .orig-lang {
+    overflow-y: hidden;
+    height: 0;
+    transition-property: height;
+    transition-duration: 1s;
+}
+
+body .orig-lang h3 {
+    margin-top: 0;
+}
+
+body.show-orig-langs .orig-lang {
+    height: max-content;
+    background-color: #e8e8e8;
+}
+
 /* .feed-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
 } */
 
-.orig-lang {
-    /* display: none; */
+/* .orig-lang {
     border: 1px solid #ccc;
     padding: 10px;
     margin-left: 20px;
-}
+} */

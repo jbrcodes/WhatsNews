@@ -6,7 +6,7 @@ import peewee as pw
 from . import BaseModel
 
 
-MAX_DESC_WORDS = 30
+MAX_DESC_WORDS = 40
 
 
 class Site(BaseModel):

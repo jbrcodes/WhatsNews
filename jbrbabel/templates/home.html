@@ -6,28 +6,51 @@
 
 {% block content %}
 
+<h1>Can You Ungrok That For Me?</h1>
+
+<div class="p-2 border text-end">
+    Original languages:
+    <a id="lang-toggle" class="btn btn-primary btn-sm" href="javascript: toggleOrigLangs()">show</a>
+</div>
+
 {% for site in sites %}
-    {% set f_id = loop.index %}
     <h2>{{ site.name }}</h2>
-    <div class="site-grid">
+    <div class="row">
 
         {% for item in site.feed_items %}
-            {% set div_id = 'ol_' ~ f_id ~ '_' ~ loop.index %}
-            <div>
-                <h3>{{ item.title_en }}</h3>
-                DB str: {{ item.pub_date }} | localtime:
-                <script>foo('{{ item.pub_date }}')</script>
-                <div>{{ item.summary_en }}</div>
-                <a href="javascript: showOrigLang('{{ div_id }}')">show</a>
+            <div class="col">
+                <div>
+                    <h3>{{ item.title_en|safe }}</h3>
+                    <div>{{ item.summary_en|safe }}</div>
+                </div>
+
+                <div class="orig-lang p-1 rounded">
+                    <h3 dir="auto">{{ item.title|safe }}</h3>
+                    <div dir="auto">{{ item.summary|safe }}</div>
+                </div>
+
+                <div class="meta d-flex justify-content-between p-3 border rounded">
+                    <span>
+                        <script>doDateStr('{{ item.pub_date }}')</script>
+                    </span>
+                    <a class="btn btn-primary btn-sm" target="_blank" title="Go to original article" href="{{ item.url }}">go <i class="bi bi-box-arrow-up-right"></i></a>
+                </div>
             </div>
 
-            <div id="{{ div_id }}" class="orig-lang" style="display: none">
-                <h3 dir="auto">{{ item.title }}</h3>
-                <div dir="auto">{{ item.summary }}</div>
-            </div>
         {% endfor %}
 
     </div>
 {% endfor %}
 
+{% endblock %}
+
+
+{% block js %}
+<script>
+    function toggleOrigLangs() {
+        document.querySelector('body').classList.toggle('show-orig-langs');
+        link = document.getElementById('lang-toggle');
+        link.textContent = (link.textContent === 'show') ? 'hide' : 'show';
+    }
+</script>
 {% endblock %}

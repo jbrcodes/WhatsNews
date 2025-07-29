@@ -1,9 +1,9 @@
-function foo(dateStr) {
-    let dateObj = new Date(dateStr);
-    document.write( dateObj.toLocaleString() );
+function doDateStr(dateStr) {
+    let re = /(\d\d?) (\w{3}) (20\d{2})/;
+    let arr = dateStr.match(re);
+    document.write( `${arr[1]} ${arr[2]} ${arr[3]}` );
 }
 
-function showOrigLang(divId) {
-    let elem = document.getElementById(divId);
-    elem.style.display = (elem.style.display === 'none') ? 'block' : 'none';
-}
+// function toggleOrigLangs() {
+//     document.querySelector('body').classList.toggle('show-orig-langs')
+// }
