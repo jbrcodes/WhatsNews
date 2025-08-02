@@ -13,30 +13,37 @@ def redo_tables():
 
 site_data = [
     {
-        'name':     'elDiario.es',
-        'url':      'https://eldiario.es',
-        'feed_url': 'https://www.eldiario.es/rss/',
-        'country':  'Spain'
+        'name':         'elDiario.es',
+        'name_sort':    'eldiario',
+        'url':          'https://eldiario.es',
+        'feed_url':     'https://www.eldiario.es/rss/',
+        'country':      'Spain'
     },{
-        'name':     'Korean News',
-        'url':      'https://www.yna.co.kr',
-        'feed_url': 'https://www.yna.co.kr/rss/news.xml',
-        'country':  'Korea'
+        'name':         'Korean News',
+        'name_sort':    'korean news',
+        'url':          'https://www.yna.co.kr',
+        'feed_url':     'https://www.yna.co.kr/rss/news.xml',
+        'country':      'Korea'
     },{
-        'name':     'Al Jazeera',
-        'url':      'https://www.aljazeera.net',
-        'feed_url': 'https://www.aljazeera.net/aljazeerarss/',
-        'country':  'Qatar'
+        'name':         'الجزيرة',
+        'name_en':      'Al Jazeera',
+        'name_sort':    'al jazeera',
+        'url':          'https://www.aljazeera.net',
+        'feed_url':     'https://www.aljazeera.net/aljazeerarss/',
+        'country':      'Qatar'
     },{
-        'name':     'News Bulgaria',
-        'url':      'https://www.novinite.bg',
-        'feed_url': 'https://www.novinite.bg/rss',
-        'country':  'Bulgaria'
+        'name':         'News Bulgaria',
+        'name_sort':    'news bulgaria',
+        'url':          'https://www.novinite.bg',
+        'feed_url':     'https://www.novinite.bg/rss',
+        'country':      'Bulgaria'
     },{
-        'name':     'Haaretz',
-        'url':      'https://www.haaretz.co.il',
-        'feed_url': 'https://www.haaretz.co.il/srv/htz---all-articles',
-        'country':  'Israel'
+        'name':         'דף הבית',
+        'name_sort':    'haaretz',
+        'name_en':      'Haaretz',
+        'url':          'https://www.haaretz.co.il',
+        'feed_url':     'https://www.haaretz.co.il/srv/htz---all-articles',
+        'country':      'Israel'
     }
 ]
 

@@ -1,7 +1,7 @@
 # /jbrbabel/app.py
 
 # import logging
-# import re
+import re
 
 from flask import Flask, render_template
 from .models import db_init_app
@@ -33,6 +33,14 @@ def create_app():
     # app.register_blueprint(public_bp)
 
     #
+    # Template Filters
+    #
+
+    @app.template_filter('strip_http')
+    def strip_http(url):
+        return re.sub(r'^https?://', '', url)
+    
+    #
     # Routes (MOVE ME)
     #
 
@@ -48,7 +56,7 @@ def create_app():
         # )
 
         # Warning! This does N+1 queries!!
-        sites = Site.select().order_by(Site.name)
+        sites = Site.select().order_by(Site.name_sort)
 
         return render_template('home.html', sites=sites)
 

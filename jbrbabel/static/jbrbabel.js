@@ -4,6 +4,10 @@ function doDateStr(dateStr) {
     document.write( `${arr[1]} ${arr[2]} ${arr[3]}` );
 }
 
-// function toggleOrigLangs() {
-//     document.querySelector('body').classList.toggle('show-orig-langs')
-// }
+function toggleOrigLang(siteId) {
+    for (let elem of document.querySelectorAll(`#site_${siteId} .orig-lang`)) {
+        elem.classList.toggle('show-orig');
+    }
+    let but = document.getElementById(`but_${siteId}`);
+    but.textContent = (but.textContent == 'show') ? 'hide' : 'show';
+}

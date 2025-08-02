@@ -6,51 +6,63 @@
 
 {% block content %}
 
-<h1>Can You Ungrok That For Me?</h1>
+<div id="jumbo" class="d-flex justify-content-between">
+    <h1>What Are They Saying?</h1>
 
-<div class="p-2 border text-end">
-    Original languages:
-    <a id="lang-toggle" class="btn btn-primary btn-sm" href="javascript: toggleOrigLangs()">show</a>
+    <div>
+        A glimpse into what some non-English news sources are saying.
+    </div>
 </div>
 
+
+
+
 {% for site in sites %}
-    <h2>{{ site.name }}</h2>
-    <div class="row">
+    <h2 class="mt-5 mb-1">
+        {{ site.name }}
+        {% if site.name_en %}
+            ({{ site.name_en }})
+        {% endif %}
+    </h2>
+    <div class="d-flex justify-content-between mb-3">
+        <div>
+            Website: <a href="{{ site.url }}">{{ site.url|strip_http }}</a>
+            <br>
+            Country: {{ site.country }}
+        </div>
+
+        <div>
+            Original language
+            <a id="but_{{ site.id }}" class="btn btn-primary btn-sm" href="javascript: toggleOrigLang({{ site.id }})">show</a>
+        </div>
+    </div>
+
+    <div id="site_{{ site.id }}" class="row gx-4 gy-4">
 
         {% for item in site.feed_items %}
-            <div class="col">
-                <div>
-                    <h3>{{ item.title_en|safe }}</h3>
-                    <div>{{ item.summary_en|safe }}</div>
-                </div>
+            <div class="col-sm-12 col-md-6 col-xl-4">
+                <div class="my-card p-2 border rounded-2">
+                    <div>
+                        <h3>{{ item.title_en|safe }}</h3>
+                        <div>{{ item.summary_en|safe }}</div>
+                    </div>
 
-                <div class="orig-lang p-1 rounded">
-                    <h3 dir="auto">{{ item.title|safe }}</h3>
-                    <div dir="auto">{{ item.summary|safe }}</div>
-                </div>
+                    <div class="orig-lang mt-2 p-2 rounded-2">
+                        <h3 dir="auto">{{ item.title|safe }}</h3>
+                        <div dir="auto">{{ item.summary|safe }}</div>
+                    </div>
 
-                <div class="meta d-flex justify-content-between p-3 border rounded">
-                    <span>
-                        <script>doDateStr('{{ item.pub_date }}')</script>
-                    </span>
-                    <a class="btn btn-primary btn-sm" target="_blank" title="Go to original article" href="{{ item.url }}">go <i class="bi bi-box-arrow-up-right"></i></a>
+                    <div class="meta d-flex justify-content-between align-items-end mt-2">
+                        <span>
+                            <script>doDateStr('{{ item.pub_date }}')</script>
+                        </span>
+                        <a class="btn btn-primary btn-sm" target="_blank" title="Go to original article" href="{{ item.url }}">go <i class="bi bi-box-arrow-up-right"></i></a>
+                    </div>
                 </div>
             </div>
-
         {% endfor %}
 
     </div>
 {% endfor %}
 
-{% endblock %}
-
-
-{% block js %}
-<script>
-    function toggleOrigLangs() {
-        document.querySelector('body').classList.toggle('show-orig-langs');
-        link = document.getElementById('lang-toggle');
-        link.textContent = (link.textContent === 'show') ? 'hide' : 'show';
-    }
-</script>
 {% endblock %}

@@ -14,6 +14,7 @@ class Site(BaseModel):
     id = pw.AutoField()
     name = pw.CharField()
     name_en = pw.CharField(default='')
+    name_sort = pw.CharField()
     url = pw.CharField()
     feed_url = pw.CharField()
     country = pw.CharField()

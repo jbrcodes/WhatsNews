@@ -1,38 +1,33 @@
 /* /jbrbabel/static/jbrbabel.css */
 
+:root {
+    --body-bg-color: #f4f4f4;
+    --card-bg-color: white;
+    --orig-bg-color: #ccc;
+    --hilight-color: #4c6787;
+}
+
+body {
+    background-color: var(--body-bg-color);
+}
+
 h2 {
-    margin: 2em 0 0.5em;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 4px solid var(--hilight-color);
 }
 
-h3 {
-    margin-top: 1em;
+.my-card {
+    background-color: var(--card-bg-color);
 }
 
-body .orig-lang {
-    overflow-y: hidden;
-    height: 0;
-    transition-property: height;
-    transition-duration: 1s;
+.my-card h3 {
+    font-size: 1.25em;
 }
 
-body .orig-lang h3 {
-    margin-top: 0;
+.orig-lang {
+    display: none;
+    background-color: var(--orig-bg-color);
 }
 
-body.show-orig-langs .orig-lang {
-    height: max-content;
-    background-color: #e8e8e8;
+.show-orig {
+    display: block;
 }
-
-/* .feed-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-} */
-
-/* .orig-lang {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-left: 20px;
-} */
