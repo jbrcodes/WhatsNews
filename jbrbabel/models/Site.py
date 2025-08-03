@@ -44,7 +44,7 @@ class Site(BaseModel):
                 'summary': summ,
                 'url': entry.link,
                 'pub_date': entry.published,
-                'feed': self
+                'site': self
             }
             items.append(foo)
 
@@ -52,4 +52,4 @@ class Site(BaseModel):
 
 
     def __repr__(self):
-        return f'<Site {self.id} | {self.title}>'
+        return f'<Site {self.id} | {self.name}>'

@@ -25,8 +25,23 @@ def db_init():
 def fetch():
     deepl_init( current_app.config['DEEPL_API_KEY'] )
 
-    for site in Site.select():  # DEBUG
-        print(site.name + '...')
-        dicts = site.fetch_rss()[:3]  # NOT YET SAVED
-        dicts1 = FeedItem.add_translations(dicts)  # DEBUG
-        FeedItem.insert_many(dicts1).execute()
+    for site in Site.select():
+        name = site.name_en if site.name_en != '' else site.name
+        print(name + '...')
+
+        # Save existing item IDs for this site
+        old_items = FeedItem.select().where((FeedItem.site == site))
+        old_item_ids = [i.id for i in old_items]
+
+        # Try to do "dangerous" stuff: fetch, translate
+        try:
+            dicts = site.fetch_rss()[:3]  # NOT YET SAVED
+            dicts1 = FeedItem.add_translations(dicts)
+            FeedItem.insert_many(dicts1).execute()
+
+            # If we get this far, everything worked; delete old items
+            if len(old_item_ids) > 0:
+                FeedItem.delete().where(FeedItem.id.in_(old_item_ids)).execute()
+        except Exception as err:
+            # FIXME: change to log
+            print(f"################### Exception with site '{name}': {err}")

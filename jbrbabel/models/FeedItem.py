@@ -15,7 +15,7 @@ class FeedItem(BaseModel):
     summary_en = pw.CharField()
     pub_date = pw.DateTimeField()
     url = pw.CharField()
-    feed = pw.ForeignKeyField(Site, backref='feed_items')
+    site = pw.ForeignKeyField(Site, backref='feed_items')
 
     class Meta:
         table_name = 'feed_items'
