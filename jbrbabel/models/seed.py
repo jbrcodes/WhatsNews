@@ -19,11 +19,12 @@ site_data = [
         'feed_url':     'https://www.eldiario.es/rss/',
         'country':      'Spain'
     },{
-        'name':         'Korean News',
-        'name_sort':    'korean news',
+        'name':         '연합뉴스',
+        'name_en':      'Yonhap News',
+        'name_sort':    'yonhap news',
         'url':          'https://www.yna.co.kr',
         'feed_url':     'https://www.yna.co.kr/rss/news.xml',
-        'country':      'Korea'
+        'country':      'South Korea'
     },{
         'name':         'الجزيرة',
         'name_en':      'Al Jazeera',
@@ -32,8 +33,9 @@ site_data = [
         'feed_url':     'https://www.aljazeera.net/aljazeerarss/',
         'country':      'Qatar'
     },{
-        'name':         'News Bulgaria',
-        'name_sort':    'news bulgaria',
+        'name':         'Новините',
+        'name_en':      'Novinite',
+        'name_sort':    'novinite',
         'url':          'https://www.novinite.bg',
         'feed_url':     'https://www.novinite.bg/rss',
         'country':      'Bulgaria'

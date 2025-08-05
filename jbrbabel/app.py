@@ -47,18 +47,15 @@ def create_app():
     @app.route('/')
     def home():
         from .models.Site import Site
-        # from .models.FeedItem import FeedItem
-
-        # feeds = (Feed
-        #          .select()
-        #          .join(FeedItem)
-        #          .order_by(Feed.title, -FeedItem.pub_date)
-        # )
 
         # Warning! This does N+1 queries!!
         sites = Site.select().order_by(Site.name_sort)
 
         return render_template('home.html', sites=sites)
+    
+    @app.route('/about')
+    def about():
+        return render_template('about.html')
 
     return app
 
