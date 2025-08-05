@@ -29,7 +29,7 @@ def fetch():
 
     logging.info('BEGIN whatsnews fetch')
 
-    for site in Site.select()[:2]:
+    for site in Site.select():
         name = site.name_en if site.name_en != '' else site.name
         logging.info( f'{name}...' )
 
