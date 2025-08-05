@@ -1,4 +1,4 @@
-# /jbrbabel/lib/deepl.py
+# /whatsnews/lib/deepl.py
 
 import deepl
 

@@ -1,4 +1,4 @@
-# /jbrbabel/models/Site.py
+# /whatsnews/models/Site.py
 
 import re
 import feedparser

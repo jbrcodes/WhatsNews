@@ -1,0 +1,1 @@
+# /whatsnews/__init__.py

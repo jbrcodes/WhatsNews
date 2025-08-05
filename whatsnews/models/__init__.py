@@ -1,4 +1,4 @@
-# /jbrbabel/models/__init__.py
+# /whatsnews/models/__init__.py
 
 import peewee as pw
 

@@ -1,4 +1,4 @@
-# /jbrbabel/models/seed.py
+# /whatsnews/models/seed.py
 
 from . import db
 from .Site import Site

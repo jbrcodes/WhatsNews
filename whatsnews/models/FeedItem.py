@@ -1,9 +1,9 @@
-# /jbrbabel/models/FeedItem.py
+# /whatsnews/models/FeedItem.py
 
 import peewee as pw
 from . import BaseModel
 from .Site import Site
-from jbrbabel.lib.deepl import translate_strs
+from whatsnews.lib.deepl import translate_strs
 
 
 class FeedItem(BaseModel):

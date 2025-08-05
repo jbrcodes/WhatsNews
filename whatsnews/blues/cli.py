@@ -1,10 +1,12 @@
-# /jbrbabel/blues/cli.py
+# /whatsnews/blues/cli.py
+
+import logging
 
 from flask import Blueprint, current_app
-from jbrbabel.lib.deepl import deepl_init
-from jbrbabel.models.seed import redo_tables, do_seed
-from jbrbabel.models.Site import Site
-from jbrbabel.models.FeedItem import FeedItem
+from whatsnews.lib.deepl import deepl_init
+from whatsnews.models.seed import redo_tables, do_seed
+from whatsnews.models.Site import Site
+from whatsnews.models.FeedItem import FeedItem
 
 
 bp = Blueprint('cli', __name__, cli_group=None)
@@ -25,9 +27,11 @@ def db_init():
 def fetch():
     deepl_init( current_app.config['DEEPL_API_KEY'] )
 
-    for site in Site.select():
+    logging.info('BEGIN whatsnews fetch')
+
+    for site in Site.select()[:2]:
         name = site.name_en if site.name_en != '' else site.name
-        print(name + '...')
+        logging.info( f'{name}...' )
 
         # Save existing item IDs for this site
         old_items = FeedItem.select().where((FeedItem.site == site))
@@ -35,13 +39,14 @@ def fetch():
 
         # Try to do "dangerous" stuff: fetch, translate
         try:
-            dicts = site.fetch_rss()[:3]  # NOT YET SAVED
+            dicts = site.fetch_rss()[:3]  # (not yet saved in DB)
             dicts1 = FeedItem.add_translations(dicts)
-            FeedItem.insert_many(dicts1).execute()
+            FeedItem.insert_many(dicts1).execute()  # save in DB
 
             # If we get this far, everything worked; delete old items
             if len(old_item_ids) > 0:
                 FeedItem.delete().where(FeedItem.id.in_(old_item_ids)).execute()
         except Exception as err:
-            # FIXME: change to log
-            print(f"################### Exception with site '{name}': {err}")
+            logging.error( f"Error with site '{name}': {err}" )
+
+    logging.info('END whatsnews fetch')

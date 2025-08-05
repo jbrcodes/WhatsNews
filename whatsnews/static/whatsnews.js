@@ -1,4 +1,4 @@
-/* /jbrbabel/static/jbrbabel.js */
+/* /whatsnews/static/whatsnews.js */
 
 function doDateStr(isoDateStr) {
     let re = /(\d\d?) (\w{3}) (20\d{2})/;

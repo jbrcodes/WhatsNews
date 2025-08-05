@@ -1,0 +1,29 @@
+#!/bin/bash
+
+
+if [[ ! "$1" ]]
+then
+    echo "Usage: whatsnews <subcmd>"
+    exit 1
+fi
+
+# Go to Flask proj dir
+script=$(readlink -f "$0")
+script_dir=$(dirname "$script")
+cd $script_dir/..
+
+# Do host-specific stuff
+if [[ `hostname` == *opalstack.com ]]
+then
+    # prod
+    source ../env/bin/activate
+    log_dir=~/logs/apps/whatsnews
+else
+    # dev
+    source venv/bin/activate
+    log_dir=logs
+fi
+log_file=${log_dir}/flask.log
+
+# Let's go!
+flask --app whatsnews.app $@ 2>> ${log_file}
