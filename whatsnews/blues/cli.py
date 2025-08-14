@@ -1,10 +1,12 @@
 # /whatsnews/blues/cli.py
 
+import click
+import json
 import logging
 
 from flask import Blueprint, current_app
 from whatsnews.lib.deepl import deepl_init
-from whatsnews.models.seed import redo_tables, do_seed
+from whatsnews.models import redo_tables, do_seed
 from whatsnews.models.Site import Site
 from whatsnews.models.FeedItem import FeedItem
 
@@ -20,7 +22,17 @@ def foo():
 @bp.cli.command('db-init')
 def db_init():
     redo_tables()
-    do_seed()
+
+
+@bp.cli.command('db-seed')
+@click.argument('filename')
+def db_seed(filename):
+    try:
+        with open(filename, 'r') as f:
+            sites_data = json.load(f)
+        do_seed(sites_data)
+    except Exception as err:
+        print(err)
 
 
 @bp.cli.command('fetch')
