@@ -3,7 +3,7 @@
 import logging
 import re
 
-from flask import Flask, render_template
+from flask import Flask
 from .models import db_init_app
 
 
@@ -29,6 +29,8 @@ def create_app():
 
     from .blues.cli import bp as cli_bp
     app.register_blueprint(cli_bp)
+    from .blues.public import bp as public_bp
+    app.register_blueprint(public_bp)
 
     #
     # Template Filters
@@ -37,23 +39,6 @@ def create_app():
     @app.template_filter('strip_http')
     def strip_http(url):
         return re.sub(r'^https?://', '', url)
-    
-    #
-    # Routes (MOVE ME)
-    #
-
-    @app.route('/')
-    def home():
-        from .models.Site import Site
-
-        # Warning! This does N+1 queries!!
-        sites = Site.select().order_by(Site.name_sort)
-
-        return render_template('home.html', sites=sites)
-    
-    @app.route('/about')
-    def about():
-        return render_template('about.html')
 
     return app
 
