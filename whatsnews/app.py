@@ -3,7 +3,8 @@
 import logging
 import re
 
-from flask import Flask
+from flask import Flask, g
+from jinjax import Catalog
 from .models import db_init_app
 
 
@@ -39,6 +40,21 @@ def create_app():
     @app.template_filter('strip_http')
     def strip_http(url):
         return re.sub(r'^https?://', '', url)
+    
+    #
+    # JinjaX
+    #
+
+    catalog = Catalog(jinja_env=app.jinja_env, file_ext='.html')
+    catalog.add_folder('whatsnews/jinjax')
+
+    #
+    # "Middleware"
+    #
+
+    @app.before_request
+    def add_catalog_to_g():
+        g.jinjax_catalog = catalog
 
     return app
 

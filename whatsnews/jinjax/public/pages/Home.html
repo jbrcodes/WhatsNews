@@ -1,0 +1,27 @@
+{# public.pages.Home #}
+
+
+{#def sites #}
+
+{% set title = 'Home' %}
+
+
+<public.pages.Layout title={{ title }}>
+    <main class="HomePage">
+        <div id="jumbo">
+            <div id="jumbo-grid" class="container">
+                <div id="spruch">What's New(s)?</div>
+
+                <div id="smalltext">
+                    A (translated) glimpse into a few non-English news sources
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            {% for site in sites %}
+                <public.HomeSiteGrid site={{ site }} />
+            {% endfor %}
+        </div>
+    </main>
+</public.pages.Layout>

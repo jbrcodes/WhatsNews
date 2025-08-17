@@ -1,0 +1,27 @@
+{# public.pages.Layout #}
+
+
+{% set title = 'About' %}
+
+
+<public.pages.Layout title={{ title }}>
+    <main class="AboutPage mx-auto" style="max-width: 600px">
+        <h1 class="mt-5">{{ title }}</h1>
+
+        <p>
+            This website displays a random selection of article summaries,
+            translated into English, of a few selected foreign-language news websites.
+            Summaries are updated automatically a few times a week.
+        </p>
+
+        <p>
+            Click on the 'show' button to the right of each website name to display
+            the original foreign language title and summary.
+        </p>
+
+        <p>
+            For more information, see
+            <a href="https://www.jbrcodes.com/blog/2025/08/glimpse-foreign-news/">A Glimpse into Foreign-Language News</a>.
+        </p>
+    </main>
+</public.pages.Layout>

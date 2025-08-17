@@ -1,6 +1,6 @@
 # /whatsnews/blues/public.py
 
-from flask import Blueprint, render_template
+from flask import Blueprint, g
 
 
 bp = Blueprint('public', __name__)
@@ -13,9 +13,9 @@ def home():
     # Warning! This does N+1 queries!!
     sites = Site.select().order_by(Site.name_sort)
 
-    return render_template('home.html', sites=sites)
+    return g.jinjax_catalog.render('public.pages.Home', sites=sites)
 
 
 @bp.route('/about')
 def about():
-    return render_template('about.html')
+    return g.jinjax_catalog.render('public.pages.About')
