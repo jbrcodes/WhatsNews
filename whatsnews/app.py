@@ -33,6 +33,11 @@ def create_app():
     from .blues.public import bp as public_bp
     app.register_blueprint(public_bp)
 
+    from .blues.admin import bp as admin_bp
+    from .blues.site import bp as site_bp
+    admin_bp.register_blueprint(site_bp)
+    app.register_blueprint(admin_bp)
+
     #
     # Template Filters
     #

@@ -1,0 +1,40 @@
+{# admin.Site.List #}
+
+{#def sites #}
+
+{% from 'macros.html' import duo_site_name %}
+
+
+<script>
+    function confdel(name) {
+        return confirm(`Really delete site '${name}'?`);
+    }
+</script>
+
+
+<div class="AdminSiteList">
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>URL</th>
+            <th>Active</th>
+            <th>Commands</th>
+        </tr>
+        {% for site in sites %}
+            <tr>
+                <td>{{ site.id }}</td>
+                <td>{{ duo_site_name(site) }}</td>
+                <td>{{ site.url }}</td>
+                <td>{{ site.active }}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="{{ url_for('admin.site.view', id=site.id) }}">view</a>
+                    <a class="btn btn-primary btn-sm" href="{{ url_for('admin.site.update', id=site.id) }}">edit</a>
+                    <a class="btn btn-primary btn-sm" onclick="return confdel('{{ site.name }}')" href="{{ url_for('admin.site.delete', id=site.id) }}">delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a class="btn btn-primary" href="{{ url_for('admin.site.create') }}">Create Site</a>
+</div>

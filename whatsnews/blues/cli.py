@@ -41,13 +41,13 @@ def fetch():
 
     logging.info('BEGIN whatsnews fetch')
 
-    for site in Site.select():
+    for site in Site.select().where(Site.active):
         name = site.name_en if site.name_en != '' else site.name
         logging.info( f'{name}...' )
 
-        # Save existing item IDs for this site
-        old_items = FeedItem.select().where((FeedItem.site == site))
-        old_item_ids = [i.id for i in old_items]
+        # Save prior item IDs for this site
+        prior_items = FeedItem.select().where((FeedItem.site == site))
+        prior_item_ids = [i.id for i in prior_items]
 
         # Try to do "dangerous" stuff: fetch, translate
         try:
@@ -55,9 +55,9 @@ def fetch():
             dicts1 = FeedItem.add_translations(dicts)
             FeedItem.insert_many(dicts1).execute()  # save in DB
 
-            # If we get this far, everything worked; delete old items
-            if len(old_item_ids) > 0:
-                FeedItem.delete().where(FeedItem.id.in_(old_item_ids)).execute()
+            # If we get this far, everything worked; delete prior items
+            if len(prior_item_ids) > 0:
+                FeedItem.delete().where(FeedItem.id.in_(prior_item_ids)).execute()
         except Exception as err:
             logging.error( f"Error with site '{name}': {err}" )
 

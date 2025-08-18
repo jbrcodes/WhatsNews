@@ -1,0 +1,15 @@
+{# admin.pages.Site.Index #}
+
+{#def sites #}
+
+
+{% set title = 'Dashboard (Admin)' %}
+
+
+<admin.pages.Layout title={{ title }}>
+    <main class="AdminSiteIndex container">
+        <h1>Admin.Site.Index</h1>
+
+        <admin.Site.List sites={{ sites }} />
+    </main>
+</admin.pages.Layout>

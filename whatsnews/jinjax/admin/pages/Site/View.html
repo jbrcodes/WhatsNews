@@ -1,0 +1,15 @@
+{# admin.pages.Site.View #}
+
+{#def site #}
+
+{% from 'macros.html' import duo_site_name %}
+
+<admin.pages.Layout title="Edit!">
+    <main class="container">
+        <div class="admin-pages-Site-View">
+            <h1>{{ duo_site_name(site) }}</h1>
+
+            <a class="btn btn-primary" href="{{ url_for('admin.site.index') }}">back</a>
+        </div>
+    </main>
+</admin.pages.Layout>

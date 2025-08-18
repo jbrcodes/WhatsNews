@@ -106,3 +106,10 @@ footer {
         column-gap: 50px;
     }
 }
+
+
+.wtf-field-error {
+    padding: 5px;
+    color: red;
+    font-size: 90%;
+}

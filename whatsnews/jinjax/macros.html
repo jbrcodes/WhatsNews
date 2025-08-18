@@ -1,0 +1,7 @@
+
+
+
+{% macro duo_site_name(site) %}
+    {{ site.name }}
+    {% if site.name_en %}({{ site.name_en }}){% endif %}
+{% endmacro %}
