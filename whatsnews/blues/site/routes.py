@@ -1,10 +1,13 @@
 # /whatsnews/blues/site/routes.py
 
-from flask import abort, Blueprint, g, redirect, url_for
+from flask import abort, Blueprint, g, redirect, request, url_for
 import peewee
 from whatsnews.models import db
 from whatsnews.models.Site import Site
 from whatsnews.blues.site.forms import SiteForm
+
+
+PAGE_SIZE = 10
 
 
 bp = Blueprint('site', __name__, url_prefix='/sites')
@@ -12,7 +15,8 @@ bp = Blueprint('site', __name__, url_prefix='/sites')
 
 @bp.route('/')
 def index():
-    sites = Site.select().order_by(Site.name_sort)
+    page_no = int( request.args.get('page_no', 1) )
+    sites = Site.select().order_by(Site.name_sort).paginate(page_no, PAGE_SIZE)
 
     return g.jinjax_catalog.render('admin.pages.Site.Index', sites=sites)
 

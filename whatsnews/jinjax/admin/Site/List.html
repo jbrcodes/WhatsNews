@@ -36,5 +36,7 @@
         {% endfor %}
     </table>
 
+    <admin.Paginator />
+
     <a class="btn btn-primary" href="{{ url_for('admin.site.create') }}">Create Site</a>
 </div>

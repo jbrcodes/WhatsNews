@@ -119,3 +119,18 @@ footer {
     padding: 0 .75rem;
     margin: 1rem auto;
 }
+
+/*****
+ * admin.Paginator
+ *****/
+
+nav.Paginator {
+    display: flex;
+    justify-content: center;
+    background-color: inherit;
+}
+
+/* Override Bootstrap's display: block */
+nav.Paginator a.page-link {
+    display: inline;
+}
