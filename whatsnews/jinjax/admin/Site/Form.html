@@ -8,7 +8,7 @@
 {% endif %}
 
 
-<form class="SiteForm" method="POST" action="{{ action_url }}">
+<form method="POST" action="{{ action_url }}">
     {% for field in form %}
         {% if field.type == 'CSRFTokenField' %}
             {{ form.csrf_token }}
@@ -30,7 +30,7 @@
         {% endif %}
     {% endfor %}
 
-    <div class="mb-3">
+    <div>
         <button class="btn btn-primary" type="submit">Save</button>
         <a class="btn btn-outline-primary" href="{{ url_for('admin.site.index') }}">Cancel</a>
     </div>

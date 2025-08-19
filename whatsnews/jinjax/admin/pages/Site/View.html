@@ -6,10 +6,9 @@
 
 <admin.pages.Layout title="Edit!">
     <main class="container">
-        <div class="admin-pages-Site-View">
-            <h1>{{ duo_site_name(site) }}</h1>
+        <admin.Site.View site={{ site }} />
 
-            <a class="btn btn-primary" href="{{ url_for('admin.site.index') }}">back</a>
-        </div>
+        <a class="btn btn-primary" href="{{ url_for('admin.site.index') }}">return</a>
+        <a class="btn btn-primary" href="{{ url_for('admin.site.update', id=site.id) }}">edit</a>
     </main>
 </admin.pages.Layout>

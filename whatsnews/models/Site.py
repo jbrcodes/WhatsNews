@@ -18,7 +18,7 @@ class Site(BaseModel):
     url = pw.CharField()
     feed_url = pw.CharField()
     country = pw.CharField()
-    active = pw.BooleanField(default=True)
+    is_active = pw.BooleanField(default=True)
     last_fetched = pw.DateTimeField(null=True)
 
     class Meta:

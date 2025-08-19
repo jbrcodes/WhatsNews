@@ -1,0 +1,42 @@
+{# admin.Site.View #}
+
+{#def site #}
+
+
+{% from 'macros.html' import duo_site_name %}
+
+
+<div class="AdminSiteView">
+    <h1>{{ duo_site_name(site) }}</h1>
+
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <td>{{ site.name }}</td>
+        </tr>
+        <tr>
+            <th>Name (EN)</th>
+            <td>{{ site.name_en }}</td>
+        </tr>
+        <tr>
+            <th>Name (sort)</th>
+            <td>{{ site.name_sort }}</td>
+        </tr>
+        <tr>
+            <th>Site URL</th>
+            <td><a href="{{ site.url }}">{{ site.url }}</a></td>
+        </tr>
+        <tr>
+            <th>Feed URL</th>
+            <td><a href="{{ site.feed_url }}">{{ site.feed_url }}</a></td>
+        </tr>
+        <tr>
+            <th>Country</th>
+            <td>{{ site.country }}</td>
+        </tr>
+        <tr>
+            <th>Active</th>
+            <td>{{ site.is_active }}</td>
+        </tr>
+    </table>
+</div>

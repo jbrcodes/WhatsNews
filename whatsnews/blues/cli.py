@@ -41,7 +41,7 @@ def fetch():
 
     logging.info('BEGIN whatsnews fetch')
 
-    for site in Site.select().where(Site.active):
+    for site in Site.select().where(Site.is_active):
         name = site.name_en if site.name_en != '' else site.name
         logging.info( f'{name}...' )
 

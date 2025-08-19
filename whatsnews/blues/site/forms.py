@@ -13,4 +13,4 @@ class SiteForm(FlaskForm):
     url = StringField('Site URL', validators=[DataRequired(), URL()])
     feed_url = StringField('Feed URL', validators=[DataRequired(), URL()])
     country = StringField('Country', validators=[DataRequired()])
-    active = BooleanField('Active')
+    is_active = BooleanField('Active', default=True)
