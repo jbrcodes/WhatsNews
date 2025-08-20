@@ -14,17 +14,17 @@ from whatsnews.models.FeedItem import FeedItem
 bp = Blueprint('cli', __name__, cli_group=None)
 
 
-@bp.cli.command('foo')
+@bp.cli.command('foo', help='A little test...')
 def foo():
     print('This is a (foo) test!')
 
 
-@bp.cli.command('db-init')
+@bp.cli.command('db-init', help='Drop/create tables')
 def db_init():
     redo_tables()
 
 
-@bp.cli.command('db-seed')
+@bp.cli.command('db-seed', help='Seed sites table from JSON file')
 @click.argument('filename')
 def db_seed(filename):
     try:
@@ -35,7 +35,7 @@ def db_seed(filename):
         print(err)
 
 
-@bp.cli.command('fetch')
+@bp.cli.command('fetch', help='Fetch/translate/save RSS items for active sites')
 def fetch():
     deepl_init( current_app.config['DEEPL_API_KEY'] )
 
