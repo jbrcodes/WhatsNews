@@ -19,6 +19,17 @@ def foo():
     print('This is a (foo) test!')
 
 
+@bp.cli.command('add-admin', help="Create user 'admin'")
+@click.argument('password')
+def add_admin(password):
+    from whatsnews.models.User import User
+
+    try:
+        user = User.create(username='admin', password=password, is_admin=True)
+    except Exception as err:
+        print('Error:', err)
+
+
 @bp.cli.command('db-init', help='Drop/create tables')
 def db_init():
     redo_tables()

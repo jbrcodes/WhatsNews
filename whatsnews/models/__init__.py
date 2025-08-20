@@ -1,11 +1,13 @@
 # /whatsnews/models/__init__.py
 
 import peewee as pw
+from playhouse.signals import Model as SigModel  # required for signal support
+
 
 db = pw.SqliteDatabase(None)
 
 
-class BaseModel(pw.Model):
+class BaseModel(SigModel):
     class Meta:
         database = db
 
@@ -18,8 +20,9 @@ def db_init_app(app):
 def redo_tables():
     from .FeedItem import FeedItem
     from .Site import Site
+    from .User import User
 
-    classes = [Site, FeedItem]
+    classes = [Site, FeedItem, User]
     db.drop_tables(classes)
     db.create_tables(classes)
 
