@@ -1,12 +1,11 @@
 {# admin.pages.Dashboard #}
 
 
-
 {% set title = 'Dashboard (Admin)' %}
 
 
 <admin.pages.Layout title={{ title }}>
     <main class="DashboardAdmin container">
-        <h1>Welcome to the Dashboard (Admin)!</h1>
+        <h1>Welcome to the Dashboard, <em>{{ user_auth.get_attr('username') }}</em>!</h1>
     </main>
 </admin.pages.Layout>
