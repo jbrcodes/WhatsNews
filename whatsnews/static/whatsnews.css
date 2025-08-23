@@ -134,3 +134,11 @@ nav.Paginator {
 nav.Paginator a.page-link {
     display: inline;
 }
+
+.bi-hand-thumbs-up-fill {
+    color: green;
+}
+
+.bi-hand-thumbs-down-fill {
+    color: red;
+}

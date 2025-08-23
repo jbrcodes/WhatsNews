@@ -22,11 +22,12 @@
             <th>Commands</th>
         </tr>
         {% for site in sites %}
+            {% set up_down = 'up' if site.is_active else 'down' %}
             <tr>
                 <td>{{ site.id }}</td>
                 <td>{{ duo_site_name(site) }}</td>
                 <td>{{ site.url }}</td>
-                <td>{{ site.is_active }}</td>
+                <td><i class="bi bi-hand-thumbs-{{ up_down }}-fill"></i></td>
                 <td>
                     <a class="btn btn-primary btn-sm" href="{{ url_for('admin.site.view', id=site.id) }}">view</a>
                     <a class="btn btn-primary btn-sm" href="{{ url_for('admin.site.update', id=site.id) }}">edit</a>

@@ -35,8 +35,9 @@
             <td>{{ site.country }}</td>
         </tr>
         <tr>
+            {% set up_down = 'up' if site.is_active else 'down' %}
             <th>Active</th>
-            <td>{{ site.is_active }}</td>
+            <td><i class="bi bi-hand-thumbs-{{ up_down }}-fill"></i></td>
         </tr>
     </table>
 </div>
