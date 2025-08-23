@@ -3,7 +3,7 @@
 import logging
 import re
 
-from flask import Flask, g, redirect, request, url_for   # do I need 'session' here too?
+from flask import Flask, g
 from flask_session import Session
 from jinjax import Catalog
 
@@ -74,12 +74,6 @@ def create_app():
     @app.before_request
     def add_catalog_to_g():
         g.jinjax_catalog = catalog
-    
-    @app.before_request
-    def check_for_admin():
-        ''' "Guard" the entire admin area '''
-        if request.full_path.startswith('/admin/') and not user_auth.is_logged_in():
-            return redirect( url_for('auth.login', next=request.full_path) )
 
     return app
 
