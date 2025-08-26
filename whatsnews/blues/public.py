@@ -11,7 +11,7 @@ def home():
     from whatsnews.models.Site import Site
 
     # Warning! This does N+1 queries!!
-    sites = Site.select().order_by(Site.name_sort)
+    sites = Site.select().where(Site.is_active).order_by(Site.name_sort)
 
     return g.jinjax_catalog.render('public.pages.Home', sites=sites)
 
