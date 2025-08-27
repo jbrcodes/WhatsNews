@@ -5,6 +5,7 @@ venv/
 data/
 instance/
 fabric/
+flask_session/
 jbr/
 logs/
 

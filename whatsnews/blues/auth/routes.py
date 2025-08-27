@@ -1,6 +1,6 @@
 # /whatsnews/blues/auth/routes.py
 
-from flask import Blueprint, flash, g, redirect, request, url_for
+from flask import Blueprint, current_app, flash, g, redirect, request, session, url_for
 from whatsnews.blues.auth.forms import LoginForm
 from whatsnews.models.User import User
 from whatsnews.blues.auth.models import user_auth
@@ -19,6 +19,10 @@ def login():
             user = User.login(form.username.data, form.password.data)
             if user:
                 user_auth.login(user)
+
+                # https://flask-session.readthedocs.io/en/latest/security.html#session-fixation
+                current_app.session_interface.regenerate(session)
+
                 next_url = request.form.get('next', '')
                 url = next_url if next_url != '' else url_for('public.home')
                 flash('Login succeeded', 'success')
