@@ -12,16 +12,16 @@
         {# left-aligned #}
         <div class="collapse navbar-collapse" id="i-am-the-actual-menu">
             <div class="navbar-nav">
-                <a class="nav-link" aria-current="page" href="/admin">Dashboard</a>
-                <a class="nav-link" href="/admin/sites">Sites</a>
+                <a class="nav-link" aria-current="page" href="{{ url_for('admin.dashboard') }}">Dashboard</a>
+                <a class="nav-link" href="{{ url_for('admin.site.index') }}">Sites</a>
             </div>
         </div>
 
         {# right-aligned #}
         <div class="d-flex">
-            <a class="nav-link" href="/">Public</a>
+            <a class="nav-link" href="{{ url_for('public.home') }}">Public</a>
             &nbsp;&nbsp;
-            <a class="nav-link" href="/logout">Logout</a>
+            <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
         </div>
     </div>
 </nav>

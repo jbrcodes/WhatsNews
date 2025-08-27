@@ -4,7 +4,7 @@ from flask import Blueprint, g, redirect, request, url_for
 from whatsnews.blues.auth.models import user_auth
 
 
-bp = Blueprint('admin', __name__, url_prefix='/admin')
+bp = Blueprint('admin', __name__, url_prefix='/jbr-admin')
 
 
 @bp.before_request
