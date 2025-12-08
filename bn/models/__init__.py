@@ -18,11 +18,11 @@ def db_init_app(app):
 
 
 def redo_tables():
-    from .FeedItem import FeedItem
+    from .Post import Post
     from .Site import Site
     from .User import User
 
-    classes = [Site, FeedItem, User]
+    classes = [Site, Post, User]
     db.drop_tables(classes)
     db.create_tables(classes)
 

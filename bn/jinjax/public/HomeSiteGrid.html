@@ -23,24 +23,24 @@
 
 
     <div id="site_{{ site.id }}" class="row gx-4 gy-4">
-        {% for item in site.feed_items %}
+        {% for post in site.posts %}
             <div class="col-sm-12 col-md-6 col-xl-4">
                 <div class="my-card p-2 border rounded-2">
                     <div>
-                        <h3>{{ item.title_en|safe }}</h3>
-                        <div>{{ item.summary_en|safe }}</div>
+                        <h3>{{ post.title_dest|safe }}</h3>
+                        <div>{{ post.text_dest|safe }}</div>
                     </div>
 
                     <div class="orig-lang mt-2 p-2 rounded-2">
-                        <h3 dir="auto">{{ item.title|safe }}</h3>
-                        <div dir="auto">{{ item.summary|safe }}</div>
+                        <h3 dir="auto">{{ post.title_src|safe }}</h3>
+                        <div dir="auto">{{ post.text_src|safe }}</div>
                     </div>
 
                     <div class="meta d-flex justify-content-between align-items-end mt-2">
                         <span>
-                            <script>doDateStr('{{ item.pub_date }}')</script>
+                            <script>doDateStr('{{ post.pub_date }}')</script>
                         </span>
-                        <a class="btn btn-primary btn-sm" target="_blank" title="Go to original article" href="{{ item.url }}">go <i class="bi bi-box-arrow-up-right"></i></a>
+                        <a class="btn btn-primary btn-sm" target="_blank" title="Go to original article" href="{{ post.url }}">go <i class="bi bi-box-arrow-up-right"></i></a>
                     </div>
                 </div>
             </div>

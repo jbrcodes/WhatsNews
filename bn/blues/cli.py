@@ -5,10 +5,8 @@ import json
 import logging
 
 from flask import Blueprint, current_app
-from bn.lib.deepl import deepl_init
 from bn.models import redo_tables, do_seed
 from bn.models.Site import Site
-from bn.models.FeedItem import FeedItem
 
 
 bp = Blueprint('cli', __name__, cli_group=None)
@@ -48,28 +46,14 @@ def db_seed(filename):
 
 @bp.cli.command('fetch', help='Fetch/translate/save RSS items for active sites')
 def fetch():
-    deepl_init( current_app.config['DEEPL_API_KEY'] )
+    from bn.lib.DeepLTranslator import DeepLTranslator
+    
+    logging.info('BEGIN babelnews fetch')
 
-    logging.info('BEGIN bn fetch')
-
+    DeepLTranslator.init( current_app.config['DEEPL_API_KEY'] )
     for site in Site.select().where(Site.is_active):
         name = site.name_en if site.name_en != '' else site.name
-        logging.info( f'{name}...' )
+        logging.info( f'==> {name}...' )
+        site.fetch_and_translate()
 
-        # Save prior item IDs for this site
-        prior_items = FeedItem.select().where((FeedItem.site == site))
-        prior_item_ids = [i.id for i in prior_items]
-
-        # Try to do "dangerous" stuff: fetch, translate
-        try:
-            dicts = site.fetch_rss()[:3]  # (not yet saved in DB)
-            dicts1 = FeedItem.add_translations(dicts)
-            FeedItem.insert_many(dicts1).execute()  # save in DB
-
-            # If we get this far, everything worked; delete prior items
-            if len(prior_item_ids) > 0:
-                FeedItem.delete().where(FeedItem.id.in_(prior_item_ids)).execute()
-        except Exception as err:
-            logging.error( f"Error with site '{name}': {err}" )
-
-    logging.info('END bn fetch')
+    logging.info('END babelnews fetch')
