@@ -6,7 +6,7 @@ import traceback
 import feedparser
 import peewee as pw
 from . import BaseModel
-from bn.lib.DeepLTranslator import DeepLTranslator
+from bn.lib.DeepLTranslator import DeepLTranslator, LangsRTL
 
 
 MAX_TEXT_WORDS = 40
@@ -22,7 +22,7 @@ class Site(BaseModel):
     url = pw.CharField()
     fetch_type = pw.CharField(max_length=10)  # rss | scraper
     fetch_url = pw.CharField()
-    fetch_scraper = pw.CharField(default='')
+    scraper_class_name = pw.CharField(default='')
     lang_src = pw.CharField(max_length=2)
     lang_dest = pw.CharField(max_length=2)
     is_active = pw.BooleanField(default=True)
@@ -41,8 +41,11 @@ class Site(BaseModel):
         
         # Try to do "dangerous" stuff: fetch, translate
         try:
-            new_posts = self._fetch_rss()[:3]  # (not yet saved in DB)
-            new_posts1 = self._add_translations(new_posts)
+            if self.fetch_type == 'rss':
+                new_posts = self._fetch_rss()  # (not yet saved in DB)
+            else:
+                new_posts = self._fetch_scraper()
+            new_posts1 = self._add_translations(new_posts[:3])
             Post.bulk_create(new_posts1)
 
             # If we get this far, everything worked; delete prior posts
@@ -65,26 +68,42 @@ class Site(BaseModel):
             text = re.sub(r'</?(div|p).*?>', '', text)
             text = re.sub(r'<br[^/>]*/?>', '', text)
 
-            # Limit length of summary
-            words = text.split()
-            if len(words) > MAX_TEXT_WORDS:
-                text = ' '.join(words[:MAX_TEXT_WORDS]) + '...'
+            # Limit length of text
+            text = self._limit_word_count(text)
 
             # Create Post and append to list
-            data = {
+            dict = {
                 'title_src': entry.title,
                 'text_src': text,
                 'url': entry.link,
-                'pub_date': entry.published,  # FIX ME: convert to yyyy-mm-dd
+                'pub_date': entry.published,  # FIX ME: convert to yyyy-mm-dd (really? maybe 'dd Mmm yyyy'?)
                 'site': self
             }
-            posts.append( Post(**data) )
+            posts.append( Post(**dict) )
 
         return posts
     
 
     def _fetch_scraper(self):
-        pass
+        import importlib
+        from bn.models.Post import Post
+
+        mod_name = f"bn.lib.scrapers.{self.scraper_class_name}"
+        mod = importlib.import_module(mod_name)
+        class_ = getattr(mod, self.scraper_class_name)
+
+        scraper = class_()
+        scraper.init()
+        post_dicts = scraper.scrape(self.fetch_url)
+        scraper.close()
+
+        posts = []
+        for dict in post_dicts:
+            post = Post(**dict, site=self)
+            post.text_src = self._limit_word_count(post.text_src)
+            posts.append(post)
+
+        return posts
     
 
     def _add_translations(self, posts):
@@ -103,6 +122,17 @@ class Site(BaseModel):
             i += 2
         
         return posts
+    
+
+    def _limit_word_count(self, text):
+        words = re.split(r'\s+', text)
+        if len(words) > MAX_TEXT_WORDS:
+            if self.lang_src in LangsRTL:
+                return '...' + ' '.join(words[-MAX_TEXT_WORDS:])
+            else:
+                return ' '.join(words[:MAX_TEXT_WORDS]) + '...'
+        else:
+            return ' '.join(words)
 
 
     def __repr__(self):

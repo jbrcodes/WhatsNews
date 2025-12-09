@@ -9,10 +9,10 @@ class Post(BaseModel):
     
     id = pw.AutoField()
     title_src = pw.CharField()
-    title_dest = pw.CharField()
+    title_dest = pw.CharField(default='')
     text_src = pw.CharField()
-    text_dest = pw.CharField()
-    pub_date = pw.DateTimeField()
+    text_dest = pw.CharField(default='')
+    pub_date = pw.DateField()
     url = pw.CharField()
     site = pw.ForeignKeyField(Site, backref='posts', on_delete='CASCADE')
 
