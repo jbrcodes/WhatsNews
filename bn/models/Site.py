@@ -6,7 +6,7 @@ import traceback
 import feedparser
 import peewee as pw
 from . import BaseModel
-from bn.lib.DeepLTranslator import DeepLTranslator, LangsRTL
+from bn.lib.DeepLTranslator import DeepLTranslator  #, LangsRTL
 
 
 MAX_TEXT_WORDS = 40
@@ -128,11 +128,6 @@ class Site(BaseModel):
         words = re.split(r'\s+', text)
         if len(words) > MAX_TEXT_WORDS:
             return ' '.join(words[:MAX_TEXT_WORDS]) + '...'
-        
-            # if self.lang_src in LangsRTL:
-            #     return '...' + ' '.join(words[-MAX_TEXT_WORDS:])
-            # else:
-            #     return ' '.join(words[:MAX_TEXT_WORDS]) + '...'
         else:
             return ' '.join(words)
 
