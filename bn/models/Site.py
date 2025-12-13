@@ -127,10 +127,12 @@ class Site(BaseModel):
     def _limit_word_count(self, text):
         words = re.split(r'\s+', text)
         if len(words) > MAX_TEXT_WORDS:
-            if self.lang_src in LangsRTL:
-                return '...' + ' '.join(words[-MAX_TEXT_WORDS:])
-            else:
-                return ' '.join(words[:MAX_TEXT_WORDS]) + '...'
+            return ' '.join(words[:MAX_TEXT_WORDS]) + '...'
+        
+            # if self.lang_src in LangsRTL:
+            #     return '...' + ' '.join(words[-MAX_TEXT_WORDS:])
+            # else:
+            #     return ' '.join(words[:MAX_TEXT_WORDS]) + '...'
         else:
             return ' '.join(words)
 

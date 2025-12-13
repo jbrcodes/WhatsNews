@@ -45,14 +45,19 @@ class AajTakScraper(BaseScraper):
         }
         dicts.append(dict)
 
-        # Third article... "Big News", no text (yet)
-        art = self.page.query_selector('#badi_khabar_2 .badikhaber-outer li')
-        dict = {
-            'title_src': art.query_selector('a').text_content().strip(),
-            'text_src': '',
-            'url': art.query_selector('a').get_attribute('href')
-        }
-        dicts.append(dict)
+        # Third article... "Big News" section
+        articles = self.page.query_selector_all('#badi_khabar_2 .badikhaber-outer li')
+        for art in articles:
+            url = art.query_selector('a').get_attribute('href')
+            # Skip videos (with '/visualstories/' in URL)
+            if re.search(r'/visualstories/', url) is None:
+                dict = {
+                    'title_src': art.query_selector('a').text_content().strip(),
+                    'text_src': '',  # no text on the home page
+                    'url': url
+                }
+                dicts.append(dict)
+                break
 
         # Now let's visit each detail page for the date
         for dict in dicts:
