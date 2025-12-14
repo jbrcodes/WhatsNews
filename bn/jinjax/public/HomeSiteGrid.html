@@ -1,14 +1,14 @@
 {#def site #}
 
 
-<div class="HomeSiteGrid">
-    <h2 class="mt-5 mb-1">
+<div id="{{ site.slug }}" class="HomeSiteGrid">
+    <h2 class="margin-start-l margin-end-4xs">
         {{ site.name }}
         {% if site.name_en %}
             ({{ site.name_en }})
         {% endif %}
     </h2>
-    <div class="d-flex justify-content-between mb-3">
+    <div class="split">
         <div>
             Website: <a href="{{ site.url }}">{{ site.url|strip_http }}</a>
             <br>
@@ -16,31 +16,33 @@
         </div>
 
         <div>
-            Original language
-            <a id="but_{{ site.id }}" class="btn btn-primary btn-sm" href="javascript: toggleOrigLang({{ site.id }})">show</a>
+            <select onchange="javascript:showLang(event, {{ site.id }})">
+                <option value="dest">English</option>
+                <option value="src">{{ site.language }}</option>
+            </select>
         </div>
     </div>
 
 
-    <div id="site_{{ site.id }}" class="row gx-4 gy-4">
+    <div id="site_{{ site.id }}" class="margin-start-l grid-auto" style="--width: 30ch">
         {% for post in site.posts %}
-            <div class="col-sm-12 col-md-6 col-xl-4">
-                <div class="my-card p-2 border rounded-2">
-                    <div>
+            <div>
+                <div class="jbr-card padding-4xs">
+                    <div class="lang-dest">
                         <h3>{{ post.title_dest|safe }}</h3>
                         <div>{{ post.text_dest|safe }}</div>
                     </div>
 
-                    <div class="orig-lang mt-2 p-2 rounded-2">
+                    <div class="lang-src">
                         <h3 dir="auto">{{ post.title_src|safe }}</h3>
                         <div dir="auto">{{ post.text_src|safe }}</div>
                     </div>
 
-                    <div class="meta d-flex justify-content-between align-items-end mt-2">
+                    <div class="margin-start-m split">
                         <span>
                             <script>doDateStr('{{ post.pub_date }}')</script>
                         </span>
-                        <a class="btn btn-primary btn-sm" target="_blank" title="Go to original article" href="{{ post.url }}">go <i class="bi bi-box-arrow-up-right"></i></a>
+                        <a class="btn primary" target="_blank" title="Go to original article" href="{{ post.url }}">go <i class="bi bi-box-arrow-up-right"></i></a>
                     </div>
                 </div>
             </div>

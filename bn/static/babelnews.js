@@ -29,3 +29,13 @@ function ecorreo() {
     link.href = href;
     document.currentScript.after(link);
 }
+
+function showLang(event, siteId) {
+    let lang = event.target.value;
+    for (let elem of document.querySelectorAll(`#site_${siteId} .lang-src`)) {
+        elem.style.display = (lang === 'src') ? 'block' : 'none';
+    }
+    for (let elem of document.querySelectorAll(`#site_${siteId} .lang-dest`)) {
+        elem.style.display = (lang === 'src') ? 'none' : 'block';
+    }
+}

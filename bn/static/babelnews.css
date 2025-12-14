@@ -75,25 +75,33 @@ footer {
 }
 
 /*****
- * home / cards
+ * home / cards (that Kelp doesn't have!)
  *****/
 
-.my-card {
-    font-size: 1.25em;
+.jbr-card {
+    /* font-size: 1.25em; */
     background-color: var(--card-bg-color);
+    border-radius: 5px;
 }
 
-.my-card h3 {
+.jbr-card h3 {
     font-size: 1.25em;
+    margin-bottom: .5em;
 }
 
-.orig-lang {
+.lang-src {
     display: none;
-    background-color: var(--orig-bg-color);
+    /* background-color: #eee; /* var(--orig-bg-color); 
+    border-radius: 5px; */
 }
 
-.show-orig {
+/* .show-orig {
     display: block;
+} */
+
+.jbr-small.btn {
+    font-size: .9em;
+    padding: 2px 4px;
 }
 
 /*****
