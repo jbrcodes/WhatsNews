@@ -15,10 +15,12 @@ MAX_TEXT_WORDS = 40
 class Site(BaseModel):
     
     id = pw.AutoField()
+    slug = pw.CharField()
     name = pw.CharField()
     name_en = pw.CharField(default='')
     name_sort = pw.CharField()
     country = pw.CharField()
+    language = pw.CharField()
     url = pw.CharField()
     fetch_type = pw.CharField(max_length=10)  # rss | scraper
     fetch_url = pw.CharField()
