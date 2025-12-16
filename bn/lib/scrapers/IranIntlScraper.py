@@ -1,5 +1,6 @@
 # /bn/lib/scrapers/IranIntlScraper.py
 
+import logging
 import re
 from bn.lib.scrapers.BaseScraper import BaseScraper
 
@@ -14,7 +15,7 @@ class IranIntlScraper(BaseScraper):
 
         # Get everything we can from the home/index page
         dicts = []
-        print('scrape index...')
+        logging.info('scrape home...')
         self.page.goto(scrape_url)
         sections = self.page.query_selector_all('main.page__main > section.cluster')
         count = 0
@@ -27,12 +28,12 @@ class IranIntlScraper(BaseScraper):
 
             # Multiple things in a row; skip
             if sec.evaluate('el => el.classList.contains("cluster--hotTake")'):
-                print('skip hot take', count)
+                logging.info( f'skip hot take {count}' )
                 continue
 
             # Video carousel; skip
             if sec.query_selector('div.swiper') is not None:
-                print('skip carousel', count)
+                logging.info( f'skip carousel {count}' )
                 continue
 
             # Header, three cols, main post in right 1/2 (CSS class "undefined")
@@ -43,7 +44,7 @@ class IranIntlScraper(BaseScraper):
                     'url': art.query_selector('header a').get_attribute('href')
                 }
                 dicts.append(dict)
-                print('"undefined"', count, dict['url'])
+                logging.info( f'"undefined" {count} {dict["url"]}' )
                 continue
 
             # Catch-all? (Everything else?)
@@ -53,7 +54,7 @@ class IranIntlScraper(BaseScraper):
                 'url': art.query_selector('a.cluster-item__link').get_attribute('href')
             }
             dicts.append(dict)
-            print('catch-all?', count, dict['url'])
+            logging.info( f'catch-all? {count} {dict["url"]}')
             # END OF LOOP
 
         #
@@ -63,6 +64,7 @@ class IranIntlScraper(BaseScraper):
         # Now let's visit each detail page for the summary and date
         for dict in dicts:
             self.wait_random_timeout()
+            logging.info('scrape detail...')
             self.page.goto(dict['url'])
 
             # Get lead/summary

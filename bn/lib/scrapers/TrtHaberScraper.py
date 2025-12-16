@@ -1,5 +1,6 @@
 # /bn/lib/TrtHaberScraper.py
 
+import logging
 import re
 from bn.lib.scrapers.BaseScraper import BaseScraper
 
@@ -7,7 +8,7 @@ from bn.lib.scrapers.BaseScraper import BaseScraper
 class TrtHaberScraper(BaseScraper):
 
     def do_scrape(self, scrape_url):
-        print('scrape home...')
+        logging.info('scrape home...')
         self.page.goto(scrape_url)
         dicts = []
 
@@ -41,7 +42,7 @@ class TrtHaberScraper(BaseScraper):
         # Now let's visit each detail page for the summary/text and date
         for dict in dicts:
             self.wait_random_timeout()
-            print('scrape detail...')
+            logging.info('scrape detail...')
             self.page.goto(dict['url'])
 
             dict['text_src'] = self.page.query_selector('h2.news-spot').text_content().strip()

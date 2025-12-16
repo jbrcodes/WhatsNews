@@ -1,5 +1,6 @@
 # /bn/lib/AajTakScraper.py
 
+import logging
 import re
 from bn.lib.scrapers.BaseScraper import BaseScraper
 
@@ -23,7 +24,7 @@ HindiMonths = {
 class AajTakScraper(BaseScraper):
 
     def do_scrape(self, scrape_url):
-        print('scrape home...')
+        logging.info('scrape home...')
         self.page.goto(scrape_url)
         dicts = []
 
@@ -62,7 +63,7 @@ class AajTakScraper(BaseScraper):
         # Now let's visit each detail page for the date
         for dict in dicts:
             self.wait_random_timeout()
-            print('scrape detail...')
+            logging.info('scrape detail...')
             self.page.goto(dict['url'])
 
             # Get text for third article
