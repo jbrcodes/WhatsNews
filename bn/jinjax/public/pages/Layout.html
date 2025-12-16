@@ -11,9 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ title }} | BabelNews</title>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="{{ url_for('static', filename='babelnews.js') }}"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kelpui@1/css/kelp.css">
     <link href="{{ url_for('static', filename='babelnews.css') }}" rel="stylesheet">
-    <script src="{{ url_for('static', filename='babelnews.js') }}"></script>
 </head>
 <body>
     <header>
@@ -24,6 +25,7 @@
 
     <public.Footer />
     <public.Matomo />
+
     <script type="module" src="https://cdn.jsdelivr.net/npm/kelpui@1/js/kelp.js"></script>
 </body>
 </html>

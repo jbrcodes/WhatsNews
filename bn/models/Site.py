@@ -1,5 +1,6 @@
 # /bn/models/Site.py
 
+import datetime
 import logging
 import re
 import traceback
@@ -73,12 +74,17 @@ class Site(BaseModel):
             # Limit length of text
             text = self._limit_word_count(text)
 
+            # Massage pub_date
+            m = re.search(r'(\d\d? \w{3} \d{4})', entry.published)  # 5 Oct 2020
+            dt = datetime.datetime.strptime(m.group(1), '%d %b %Y')
+            pub_date = dt.strftime('%Y-%m-%d')  # 2020-10-05
+
             # Create Post and append to list
             dict = {
                 'title_src': entry.title,
                 'text_src': text,
                 'url': entry.link,
-                'pub_date': entry.published,  # FIX ME: convert to yyyy-mm-dd (really? maybe 'dd Mmm yyyy'?)
+                'pub_date': pub_date,
                 'site': self
             }
             posts.append( Post(**dict) )
