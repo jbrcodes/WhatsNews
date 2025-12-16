@@ -4,7 +4,6 @@ import deepl
 
 
 LangsBeta = ('fa', 'hi')  # Persian, Hindi
-# LangsRTL = ('ar', 'fa', 'he')  # Arabic, Persian, Hebrew
 
 
 deepl_client = None

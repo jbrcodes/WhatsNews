@@ -1,7 +1,8 @@
 # What's New(s)?
 
-This is a demo that periodically reads the RSS file from a few selected
-foreign-language news sites, uses the DeepL API to translate the title
+This is a demo that periodically reads the headlines of a few selected
+foreign-language news sites, either by reading an RSS feed or by scraping the home page. 
+It then uses the DeepL API to translate the title
 and summary to English, and stores the results in a SQLite DB.
 Those results are used to render the home page.
 It's not rocket science.

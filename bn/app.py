@@ -19,7 +19,7 @@ def create_app():
     else:
         app.config.from_pyfile('config_prod.py')
 
-    _config_logging()
+    _logging_config(app)
 
     #
     # Database
@@ -78,9 +78,9 @@ def create_app():
     return app
 
 
-def _config_logging():
+def _logging_config(app):
     logging.basicConfig(
-        level=logging.INFO,
+        level=app.config['LOG_LEVEL'],
         format='%(asctime)s %(levelname)s %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S'    
     )
