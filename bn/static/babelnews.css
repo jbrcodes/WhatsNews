@@ -79,7 +79,6 @@ footer {
  *****/
 
 .jbr-card {
-    /* font-size: 1.25em; */
     background-color: var(--card-bg-color);
     border-radius: 5px;
 }
@@ -89,20 +88,19 @@ footer {
     margin-bottom: .5em;
 }
 
+.jbr-card .jbr-meta {
+    border-top: 1px solid #ddd;
+    padding-top: .5em; 
+}
+
 .lang-src {
     display: none;
-    /* background-color: #eee; /* var(--orig-bg-color); 
-    border-radius: 5px; */
 }
 
-/* .show-orig {
-    display: block;
-} */
-
-.jbr-small.btn {
+/* .jbr-small.btn {
     font-size: .9em;
     padding: 2px 4px;
-}
+} */
 
 /*****
  * about
