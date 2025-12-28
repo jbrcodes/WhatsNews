@@ -20,7 +20,7 @@ class BaseScraper:
     def init(self):
         self.playwright = sync_playwright().start()
         self.browser = self.playwright.chromium.launch(headless=True)
-        ua = "Playwr1ght 1.56: What's New(s)? (demo) | whatsnews.jbrcodes.com | info@jbrcodes.com"
+        ua = "Playwr1ght 1.30: What's New(s)? (demo) | whatsnews.jbrcodes.com | info@jbrcodes.com"
         self.browser = self.browser.new_context(user_agent=ua)
         self.page = self.browser.new_page()
     

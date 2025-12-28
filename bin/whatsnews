@@ -3,7 +3,7 @@
 
 if [[ ! "$1" ]]
 then
-    echo "Usage: babelnews <subcmd>"
+    echo "Usage: whatsnews <subcmd>"
     exit 1
 fi
 
@@ -17,7 +17,7 @@ if [[ `hostname` == *opalstack.com ]]
 then
     # prod
     source ../env/bin/activate
-    log_dir=~/logs/apps/babelnews
+    log_dir=~/logs/apps/whatsnews
 else
     # dev
     source venv/bin/activate
