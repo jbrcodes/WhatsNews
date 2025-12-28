@@ -8,7 +8,7 @@ from playwright.sync_api import sync_playwright
 
 class BaseScraper:
     
-    MAX_TIMEOUT_SECS = 5
+    MAX_TIMEOUT_SECS = 10
 
 
     def __init__(self): 
@@ -20,8 +20,8 @@ class BaseScraper:
     def init(self):
         self.playwright = sync_playwright().start()
         self.browser = self.playwright.chromium.launch(headless=True)
-        # ua = 'Playwr1ght 1.56: BabelNews (demo) | babelnews.jbrcodes.com | info@jbrcodes.com'
-        # self.browser = self.browser.new_context(user_agent=ua)
+        ua = "Playwr1ght 1.56: What's New(s)? (demo) | whatsnews.jbrcodes.com | info@jbrcodes.com"
+        self.browser = self.browser.new_context(user_agent=ua)
         self.page = self.browser.new_page()
     
 
@@ -36,7 +36,7 @@ class BaseScraper:
     
 
     def wait_random_timeout(self):
-        wait_ms = random.randint(2, BaseScraper.MAX_TIMEOUT_SECS) * 1000
+        wait_ms = random.randint(3, BaseScraper.MAX_TIMEOUT_SECS) * 1000
         logging.info( f'wait {wait_ms}ms...' )
         self.page.wait_for_timeout(wait_ms)
 

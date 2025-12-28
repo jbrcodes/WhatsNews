@@ -11,6 +11,10 @@
 
     <table class="table">
         <tr>
+            <th>Slug</th>
+            <td>{{ site.slug }}</td>
+        </tr>
+        <tr>
             <th>Name</th>
             <td>{{ site.name }}</td>
         </tr>
@@ -23,21 +27,45 @@
             <td>{{ site.name_sort }}</td>
         </tr>
         <tr>
-            <th>Site URL</th>
-            <td><a href="{{ site.url }}">{{ site.url }}</a></td>
-        </tr>
-        <tr>
-            <th>Feed URL</th>
-            <td><a href="{{ site.feed_url }}">{{ site.feed_url }}</a></td>
-        </tr>
-        <tr>
             <th>Country</th>
             <td>{{ site.country }}</td>
         </tr>
         <tr>
+            <th>Language</th>
+            <td>{{ site.language }}</td>
+        </tr>
+        <tr>
+            <th>Site URL</th>
+            <td><a href="{{ site.url }}">{{ site.url }}</a></td>
+        </tr>
+        <tr>
+            <th>Fetch Type</th>
+            <td>{{ site.fetch_type }}</td>
+        </tr>
+        <tr>
+            <th>Fetch URL</th>
+            <td><a href="{{ site.fetch_url }}">{{ site.fetch_url }}</a></td>
+        </tr>
+        <tr>
+            <th>Scraper Class Name</th>
+            <td>{{ site.scraper_class_name }}</td>
+        </tr>
+        <tr>
+            <th>Source Language</th>
+            <td>{{ site.lang_src }}</td>
+        </tr>
+        <tr>
+            <th>Destination Language</th>
+            <td>{{ site.lang_dest }}</td>
+        </tr>
+        <tr>
             {% set up_down = 'up' if site.is_active else 'down' %}
-            <th>Active</th>
+            <th>Is Active</th>
             <td><i class="bi bi-hand-thumbs-{{ up_down }}-fill"></i></td>
+        </tr>
+        <tr>
+            <th>Last Fetch</th>
+            <td>{{ site.last_fetched }}</td>
         </tr>
     </table>
 </div>

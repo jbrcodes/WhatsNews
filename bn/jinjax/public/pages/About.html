@@ -5,20 +5,28 @@
 
 
 <public.pages.Layout title={{ title }}>
-    <main class="AboutPage mx-auto" style="max-width: 600px">
-        <h1 class="mt-5">{{ title }}</h1>
+    <main class="container">
+        <h1 class="margin-start-2xl margin-end-4xs">{{ title }}</h1>
 
         <p>
-            This website displays a random selection of article summaries,
-            translated into English, of a few selected foreign-language news websites.
-            Summaries are updated automatically a few times a week.
+            This website displays a selection of article summaries,
+            translated into English, from a few selected foreign-language news websites.
+            The summaries are updated several times a week.
         </p>
+
+        <p>The summaries for each site fall into one of two categories:</p>
+
+        <ul>
+            <li><b>Headlines</b> are retrieved using a <em>web scraper</em> that reads the site's home page and attempts to identify and extract the main headlines.</li>
+            <li>Summaries for sites labeled as <b>various</b> are read from an <em>RSS feed</em>, provided by some websites. An RSS feed lists the published articles, typically with the most recently published article listed first (versus the most newsworthy article).</li>
+        </ul>
 
         <p>
-            Click on the 'show' button to the right of each website name to display
-            the original foreign language title and summary.
+            English translations are displayed by default.
+            To see the original foreign language texts, select the original language from 
+            the pull-down menu for each site.
         </p>
-
+        
         <p>
             For more information, see
             <a href="https://www.jbrcodes.com/blog/2025/08/glimpse-foreign-news/">A Glimpse into Foreign-Language News</a>.

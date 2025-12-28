@@ -2,7 +2,7 @@
 
 
 <div id="{{ site.slug }}" class="HomeSiteGrid">
-    <h2 class="margin-start-l margin-end-4xs">
+    <h2 class="margin-start-2xl margin-end-4xs">
         {{ site.name }}
         {% if site.name_en %}
             ({{ site.name_en }})
@@ -10,9 +10,12 @@
     </h2>
     <div class="split">
         <div>
+            Country: {{ site.country }}
+            <br>
             Website: <a href="{{ site.url }}">{{ site.url|strip_http }}</a>
             <br>
-            Country: {{ site.country }}
+            Category: 
+            {% if site.fetch_type == 'rss' %}various{% else %}headlines{% endif %}
         </div>
 
         <div>

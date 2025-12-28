@@ -16,27 +16,42 @@ body {
     background-color: var(--body-bg-color);
 }
 
-nav {
-    background-color: var(--orig-bg-color);
-}
-
 h2 {
     border-bottom: 4px solid var(--hilight-color);
 }
 
 footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-
     background-color: var(--orig-bg-color);
 }
 
-@media screen and (min-width: 700px) {
-    footer {
-        flex-direction: row;
-    }
+
+/*****
+ * NavBar
+ *****/
+
+#my-navbar {
+    background-color: var(--orig-bg-color);
 }
+
+#my-navbar .logo {
+    margin-right: .5em;
+}
+
+#my-navbar ul {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    list-style-type: none;
+}
+
+#my-navbar li {
+    display: inline;
+}
+
+#my-navbar .btn {
+    margin-left: .5em;
+}
+
 
 /*****
  * home / jumbotron
@@ -101,18 +116,6 @@ footer {
     font-size: .9em;
     padding: 2px 4px;
 } */
-
-/*****
- * about
- *****/
-
-@media screen and (min-width: 1000px) {
-    .two-col {
-        columns: 2;
-        column-gap: 50px;
-    }
-}
-
 
 .wtf-field-error {
     padding: 5px;

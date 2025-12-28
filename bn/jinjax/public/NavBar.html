@@ -1,27 +1,21 @@
 {# public.NavBar #}
 
-
-<nav class="navbar navbar-expand">
-    <div class="container">
-        <span class="navbar-brand">BabelNews</span>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#i-am-the-actual-menu" aria-controls="i-am-the-actual-menu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
+<div id="my-navbar">
+    <nav class="container-xl padding-xl split">
         {# left-aligned #}
-        <div class="collapse navbar-collapse" id="i-am-the-actual-menu">
-            <div class="navbar-nav">
-                <a class="nav-link" aria-current="page" href="{{ url_for('public.home') }}">Home</a>
-                <a class="nav-link" href="{{ url_for('public.about') }}">About</a>
-            </div>
+        <div>
+            <span class="logo">What's New(s)?</span>
+            <ul>
+                <li><a class="btn secondary" href="{{ url_for('public.home') }}">Home</a></li>
+                <li><a class="btn secondary" href="{{ url_for('public.about') }}">About</a></li>
+            </ul>
         </div>
 
         {# right-aligned #}
-        <div class="d-flex">
-            {% if user_auth.is_logged_in() %}
-                <a class="nav-link" href="{{ url_for('admin.dashboard') }}">Admin</a>
-            {% endif %}
-        </div>
-    </div>
-</nav>
+        {% if user_auth.is_logged_in() %}
+            <ul>
+                <li><a class="btn secondary" href="{{ url_for('admin.dashboard') }}">Admin</a></li>
+            </ul>
+        {% endif %}
+    </nav>
+</div>
