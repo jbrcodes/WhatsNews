@@ -65,6 +65,7 @@ class IranIntlScraper(BaseScraper):
         for dict in dicts:
             self.wait_random_timeout()
             logging.info('scrape detail...')
+            logging.info('  ' + dict['url'])
             self.page.goto(dict['url'])
 
             # Get lead/summary

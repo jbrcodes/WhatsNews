@@ -28,6 +28,7 @@ class Globo1Scraper(BaseScraper):
         for dict in dicts:
             self.wait_random_timeout()
             logging.info('scrape detail...')
+            logging.info('  ' + dict['url'])
             self.page.goto(dict['url'])
 
             dict['title_src'] = self.page.query_selector('h1.content-head__title').text_content().strip()

@@ -43,6 +43,7 @@ class TrtHaberScraper(BaseScraper):
         for dict in dicts:
             self.wait_random_timeout()
             logging.info('scrape detail...')
+            logging.info('  ' + dict['url'])
             self.page.goto(dict['url'])
 
             dict['text_src'] = self.page.query_selector('h2.news-spot').text_content().strip()
