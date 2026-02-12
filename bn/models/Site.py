@@ -55,7 +55,7 @@ class Site(BaseModel):
             if len(prior_post_ids) > 0:
                 Post.delete().where(Post.id.in_(prior_post_ids)).execute()
         except Exception as err:
-            logging.error( f"Error with site '{self.name}': {err}" )
+            logging.error( f"Error with site '{self.slug}': {err}" )
             logging.error('Traceback: %s', traceback.format_exc())
 
 

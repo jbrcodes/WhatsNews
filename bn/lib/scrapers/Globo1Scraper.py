@@ -1,9 +1,8 @@
-# /bn/lib/scrapers/Globo1Scraper.py
+# /bn/lib/Globo1Scraper.py
 
 import logging
 import re
 from bn.lib.scrapers.BaseScraper import BaseScraper
-
 
 
 class Globo1Scraper(BaseScraper):
@@ -13,11 +12,16 @@ class Globo1Scraper(BaseScraper):
         self.page.goto(scrape_url)
         dicts = []
 
+        # hAck!!
+        logging.info('wait 10 (!!) secs...')
+        self.page.wait_for_timeout(10000)
+        logging.info('GO!!')
+
         # Interesting: Titles on home page don't correspond to titles on detail pages.
         # We'll keep the latter titles cuz that's where our link will take the reader.
 
         # Three headlines...
-        headlines = self.page.query_selector_all('.bstn-hls .bstn-hl-wrapper')
+        headlines = self.page.query_selector_all('.bstn-hls .bstn-hl-wrapper')[:3]
         for hl in headlines:
             dict = {
                 'url': hl.query_selector('a.bstn-hl-link').get_attribute('href')
@@ -28,7 +32,6 @@ class Globo1Scraper(BaseScraper):
         for dict in dicts:
             self.wait_random_timeout()
             logging.info('scrape detail...')
-            logging.info('  ' + dict['url'])
             self.page.goto(dict['url'])
 
             dict['title_src'] = self.page.query_selector('h1.content-head__title').text_content().strip()

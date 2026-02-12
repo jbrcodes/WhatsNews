@@ -48,12 +48,11 @@ def db_seed(filename):
 def fetch():
     from bn.lib.DeepLTranslator import DeepLTranslator
     
-    logging.info('BEGIN babelnews fetch')
+    logging.info('BEGIN whatsnews fetch')
 
     DeepLTranslator.init( current_app.config['DEEPL_API_KEY'] )
     for site in Site.select().where(Site.is_active):
-        name = site.name_en if site.name_en != '' else site.name
-        logging.info( f'==> {name}...' )
+        logging.info( f'==> {site.slug}...' )
         site.fetch_and_translate()
 
-    logging.info('END babelnews fetch')
+    logging.info('END whatsnews fetch')
