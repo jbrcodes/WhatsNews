@@ -60,6 +60,7 @@ class Site(BaseModel):
 
 
     def _fetch_rss(self):
+        from calendar import timegm
         from bn.models.Post import Post
 
         feed_obj = feedparser.parse(self.fetch_url)
@@ -74,10 +75,9 @@ class Site(BaseModel):
             # Limit length of text
             text = self._limit_word_count(text)
 
-            # Massage pub_date
-            m = re.search(r'(\d\d? \w{3} \d{4})', entry.published)  # 5 Oct 2020
-            dt = datetime.datetime.strptime(m.group(1), '%d %b %Y')
-            pub_date = dt.strftime('%Y-%m-%d')  # 2020-10-05
+            # Get pub_date in ISO format (yyyy-mm-dd)
+            pub_timegm = datetime.datetime.fromtimestamp(timegm(entry.published_parsed), datetime.timezone.utc)
+            pub_date = pub_timegm.strftime('%Y-%m-%d')
 
             # Create Post and append to list
             dict = {
