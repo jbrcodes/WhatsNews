@@ -48,6 +48,10 @@ class Site(BaseModel):
                 new_posts = self._fetch_rss()  # (not yet saved in DB)
             else:
                 new_posts = self._fetch_scraper()
+            if len(new_posts) == 0:
+                logging.error('Site.fetch_and_translate(): No new posts found; exiting')
+                return
+            
             new_posts1 = self._add_translations(new_posts[:3])
             Post.bulk_create(new_posts1)
 
@@ -63,7 +67,13 @@ class Site(BaseModel):
         from calendar import timegm
         from bn.models.Post import Post
 
-        feed_obj = feedparser.parse(self.fetch_url)
+        try:
+            feed_obj = feedparser.parse(self.fetch_url)
+        except Exception as err:
+            logging.error('Exception: %s', err)
+            logging.error('Traceback: %s', traceback.format_exc())
+            return []
+
         posts = []
 
         for entry in feed_obj.entries:
